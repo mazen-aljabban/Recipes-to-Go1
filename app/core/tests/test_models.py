@@ -60,7 +60,6 @@ class ModelTests(TestCase):
             user=sample_user(),
             title='bla bla',
             time_minutes=5,
-            instructions='blabla'
         )
         
         self.assertEqual(str(recipe), recipe.title)
