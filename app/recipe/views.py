@@ -31,10 +31,15 @@ class RecipeViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated,)
     queryset = Recipe.objects.all()
     serializer_class = serializers.RecipeSerializer
-
+    
+    def get_serializer_class(self):
+        if self.action == 'retrieve':
+            return serializers.RecipeDetailSerializer
+        
+        return self.serializer_class
     def get_queryset(self):
         return self.queryset.filter(user=self.request.user)
-
+    
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
